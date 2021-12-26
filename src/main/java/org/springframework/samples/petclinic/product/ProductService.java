@@ -1,6 +1,9 @@
 package org.springframework.samples.petclinic.product;
 
+import java.util.Collection;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +25,14 @@ public class ProductService {
         return productRepository.getProductType(typeName);
     }
 
+    public Collection<ProductType> getAllProductTypes() {
+	return productRepository.findAllProductTypes();
+    }
+    
+    @Transactional
     public Product save(Product p) {
-        return null;
+        productRepository.save(p);
+	return p;
     }
 
 }
